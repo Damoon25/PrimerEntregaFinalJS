@@ -29,122 +29,74 @@ const datosBurguer = [cheeseBurga, blueBurga, laLuisito, rotaBurga, baconFrito, 
 
 // funcion ver catalogo
 function catalogoBurguers() {
-    alert("Mira nuestro catalogo de burguers por la consola")
-    datosBurguer.forEach(catalogo => {
-        catalogo.datosBurguer()
-    });
+    let sectionProductos = document.getElementById(`seccionProductos`)
+    sectionProductos.innerHTML = ""
+    datosBurguer.forEach((burguer) => {
+        let nuevoProducto = document.createElement(`div`)
+        nuevoProducto.classList.add(`${burguer.tipo}`)
+        nuevoProducto.innerHTML = `
+                            <div id="${burguer.id} " class="card mx-2 my-3">
+                                <img src="public/img/${burguer.imagen}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h2 class="card-title text-left">${burguer.tipo}</h2>
+                                    <p>${burguer.descripcion}</p>
+                                    <p> <strong>Medida</strong>: ${burguer.medida}</p>
+                                    <small>Guarnición<strong>ESPECIAS</strong>: ${burguer.queso}</small>
+                                    <p>ESPECIAS: <strong>${burguer.precio}</strong><p>
+                                    <div class="col-sm-12 mt-3">
+                                        <a href="#" class="btn btn-primary">AGREGAR AL CARRITO</a>
+                                    </div>
+                                </div>
+                            </div>`
+        sectionProductos.appendChild(nuevoProducto)
+
+
+
+    })
+    const aumentarCarrito = document.getElementById(`aumentarCarrito`)
+    let contador = 0
+
+    sectionProductos.addEventListener(`click`, (e) => {
+        if (e.target.classList.contains(`btn-primary`))
+            contador++
+        aumentarCarrito.innerHTML = contador
+
+    })
+
 }
-
-//funcion  agregarPizza
-function agregarBurguer() {
-    const tipoIngresado = prompt("Cual tipo desea?")
-    const medidaIngresada = prompt("De que medida la quieres?")
-    const descripcionIngresada = prompt("Que ingredientes va a tener su burguer?")
-    const guarnicionIngresada = prompt("Ahora decime, que guarnición va a tener?")
-    const precioIngresado = parseInt(prompt("Ingresá el valor de la burguer"))
-    burguerIngresada = new burguer(datosBurguer.length + 1, tipoIngresado, medidaIngresada, descripcionIngresada, guarnicionIngresada, precioIngresado)
-    datosBurguer.push(burguerIngresada)
-    console.log(burguerIngresada)
-}
-
-// funcion eliminar pizza
-function eliminarBurguer() {
-    const nombreBurguer = prompt("Cual es la burguer que vas a eliminar, por favor especificame el nombre?")
-    datosBurguer.splice(nombreBurguer, 1)
-    alert(`Has eliminado ${nombreBurguer}`)
-    console.log(datosBurguer.length)
-    console.log(datosBurguer)
-
-}
-
-
-
 
 //funcion encontrarPizza() mediante find() el cual tiene nombre especifico
-function encontrarBurguer() {
-    const buscarBurguer = prompt("Ingresá el nombre de la Burguer: (ejemplo : cheeseBurga)")
-    const burguerEncontrada = datosBurguer.find((burguer) => burguer.tipo.toLowerCase() === buscarBurguer.toLowerCase())
+
+function encontrarPizza() {
+    let divCheeseBurga = document.getElementsByClassName(`cheeseBurga`)
+    divCheeseBurga.innerHTML = ""
+    let buscarBurguer = document.getElementById(`cheeseBurga`)
+
+    let burguerEncontrada = datosBurguer.filter((burguer) => burguer.tipo == buscarBurguer)
     console.log(burguerEncontrada)
     if (burguerEncontrada == undefined) {
-        alert("El nombre de la burguer que estas intentando buscar no se encuntra en nuestro catalogo ")
-
+        alert("El nombre de la pizza que tratas de buscar no se encuntra en nuestro catalogo ")
     } else {
-        console.log(`Felicidades! encontramos tu burguer y es:`)
+        console.log(`encontramos tu pizza y es:`)
         console.log(burguerEncontrada)
     }
-}
-
-//funcion buscarPizzaEpecia() mediante filter()
-function buscarBurguerMedida() {
-    const buscarMedida = prompt("Estamos por buscar la burguer por el tamaño ingresado")
-    const medidaEncontrada = datosBurguer.filter((medidas) => medidas.medida.toLowerCase() == buscarMedida.toLowerCase())
-    if (medidaEncontrada.length == 0) {
-        alert("ninguna burguer tiene ese tipo de tamaño")
-
-    } else {
-        alert("Estas son las burguers con ese tamaño")
-        for (const busqueda of medidaEncontrada) {
-            busqueda.datosBurguer()
-
-        }
-
-    }
-}
-
-
-
-
-// opciones  por numero mediante la coneccione de un parseInt que conecte al switch(opcionSeleccionar)
-function seleccionarOpcion() {
-    const opcionValor = parseInt(prompt(`Porfavor ingrese el numero que desea realizar:
-                                    1:  Ver catalogo de burguers.
-                                    2:  Agregar burguer al catalogo .
-                                    3:  Eliminar.
-                                    4:  Encontrar burguer por nombre.
-                                    5:  Buscar burguer por tamaño.
-                                    0:  Salir.`))
-    menuOpciones(opcionValor)
-}
-
-
-// funciones del menu por switch
-function menuOpciones(opcionSeleccionar) {
-    switch (opcionSeleccionar) {
-        case 0:
-            salir = true
-            alert("Esperamos que vuelvas a visitarnos")
-
-            break;
-
-        case 1:
-            catalogoBurguers()
-            break;
-
-        case 2:
-            agregarBurguer()
-            break;
-
-        case 3:
-            eliminarBurguer()
-            break;
-
-        case 4:
-            encontrarBurguer()
-            break;
-
-        case 5:
-            buscarBurguerMedida()
-            break;
-
-        default:
-            alert("No escogiste ninguna de las opciones, vuelve a intentarlo")
-            break;
-    }
 
 }
 
-let salir
-// Ciclo while donde se invoca preguntar opcion, si responde case 0 sale (salir == true)
-while (salir != true) {
-    seleccionarOpcion()
-}
+// filtrar por pizza
+let mostarTodo = document.getElementById(`mostrarTodo`)
+mostarTodo.addEventListener(`click`, mostrarTodasPizza)
+let pizzaHawaiana = document.getElementById(`hawaiana`)
+pizzaHawaiana.addEventListener(`click`, encontrarPizza)
+/*let pizzaPeperono = document.getElementById(`peperoni`)
+pizzaPeperono.addEventListener(`click`, mostrarPorPizza2)
+let pizzaChampiñones = document.getElementById(`champiñones`)
+pizzaChampiñones.addEventListener(`click`, mostrarPorPizza3)
+let pizzaMexicana = document.getElementById(`mexicana`)
+pizzaMexicana.addEventListener(`click`, mostrarPorPizza4)
+let pizzaPollo = document.getElementById(`pollo`)
+pizzaPollo.addEventListener(`click, `, mostrarPorPizza5)
+let pizzaVegetariana = document.getElementById(`vegetariana`)
+pizzaVegetariana.addEventListener(`click`, mostrarPorPizza6)
+let pizzaMixta = document.getElementById(`mixta`)
+pizzaMixta.addEventListener(`click`, mostrarPorPizza7)*/
