@@ -37,54 +37,67 @@
         </nav>
     </header>
 
-    <main class="container mt-5 mb-3">
-        <section id="checkBox" style="width: 12% ;">
-            <div id="divCheckBox" class="w-auto">
-                <p class="listCheckBox">
-                    <input id="mostrarTodo" type="checkbox" class="valor1"> Mostrar todo
-                </p>
-                <p class="listCheckBox">
-                    <input id="cheeseBurga" type="checkbox" class="valores"> Cheese Burga
-                </p>
-                <p class="listCheckBox">
-                    <input id="blueBurga" type="checkbox" class="valores"> Blue Burga
-                </p>
-                <p class="listCheckBox">
-                    <input id="laLuisito" type="checkbox" class="valores"> La Luisito
-                </p>
-                <p class="listCheckBox">
-                    <input id="rotaBurga" type="checkbox" class="valores"> La Rota Burga
-                </p>
-                <p class="listCheckBox">
-                    <input id="baconFrito" type="checkbox" class="valores"> Bacon Frito
-                </p>
-                <p class="listCheckBox">
-                    <input id="xxl" type="checkbox" class="valores"> XXL
-                </p>
-                <p class="listCheckBox">
-                    <input id="vegeta" type="checkbox" class="valores"> Vegeta
-                </p>
+    <main class="container d-flex justify-content-center mt-5 mb-3">
+        <div class="row col-sm-12">
+            <section id="checkBox" class="col col-sm-6">
+                <div id="divCheckBox">
+                    <p class="listCheckBox">
+                        <input id="mostrarTodo" type="checkbox" class="valor1"> Mostrar todo
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="cheeseBurga" type="checkbox" class="valores"> Cheese Burga
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="blueBurga" type="checkbox" class="valores"> Blue Burga
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="laLuisito" type="checkbox" class="valores"> La Luisito
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="rotaBurga" type="checkbox" class="valores"> La Rota Burga
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="baconFrito" type="checkbox" class="valores"> Bacon Frito
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="xxl" type="checkbox" class="valores"> XXL
+                    </p>
+                    <p class="listCheckBox">
+                        <input id="vegeta" type="checkbox" class="valores"> Vegeta
+                    </p>
 
+                </div>
+                <form>
+                    <div class="col-sm-8">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="tipoInput" placeholder="Tipo de Burga">
+                            <label for="tipoInput">Tipo de Burga</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="medidaInput" placeholder="Medida">
+                            <label for="medidaInput">Tamaño </label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="descripcionInput" placeholder="Descripción">
+                            <label for="descripcionInput">Descripción</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="guarnicionInput" placeholder="Guarnición">
+                            <label for="guarnicionInput">Guarnición</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="precioInput" placeholder="Precio">
+                            <label for="precioInput">Precio</label>
+                        </div>
+                        <button id="guardar" type="button" value="guardar"
+                            class="btn btn-success my-3 px-2">GUARDAR</button>
+                    </div>
+                </form>
+
+            </section>
+            <div id="seccionProductos" class="col col-sm-6">
+                <div></div>
             </div>
-            <form>
-                <label for="titulo">Ingrese tipo de pizza</label><br>
-                <input type="text" id="tipoInput" name="tipo"><br>
-
-                <label for="autor">Ingrese especias</label><br>
-                <input type="text" id="especiasInput" name="especias"><br>
-
-                <label for="titulo">Ingrese tipo de queso</label><br>
-                <input type="text" id="quesoInput" name="queso"><br>
-
-                <label for="titulo">Ingrese precio</label><br>
-                <input type="text" id="precioInput" name="precio"><br>
-
-            </form>
-            <input id="guardarPizza" class=" my-3 px-2" type="button" value="Guardar pizza">
-
-        </section>
-        <div id="seccionProductos" class="row mt-5 mb-5">
-            <div></div>
         </div>
 
 
