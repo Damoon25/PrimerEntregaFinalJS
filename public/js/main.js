@@ -38,6 +38,54 @@ const datosBurguer = [cheeseBurga, blueBurga, laLuisito, rotaBurga, baconFrito, 
 //     console.log(burguerIngresada)
 // }
 
+// constantes del carrito
+// const contenedorProductos = document.getElementById(`contenedor-productos`)
+
+const contenedorCarrito = document.getElementById(`carritoContenedor`)
+
+const botonVaciar = document.getElementById(`vaciarCarrito`)
+
+const contadorCarrito = document.getElementById(`contadorCarrito`)
+
+const precioTotal = document.getElementById(`precioTotal`)
+// agregar carrito
+let carrito = []
+
+// boton vaciar carrito completo
+botonVaciar.addEventListener(`click`, () => {
+    carrito.length = 0
+    actualizarCarrito()
+})
+
+/// actualizar carrito
+let actualizarCarrito = () => {
+    contenedorCarrito.innerHTML = ""
+    carrito.forEach((prod) => {
+        const div1 = document.createElement(`div`)
+        div1.className = (`productoEnCarrito`)
+        div1.innerHTML = `<img src="/public/img/${prod.imagen}" class="card-img-top" alt="..." style="height: 50px; width: 50px;">
+                       <p>${prod.tipo} personal</p>
+                       <p>Precio: ${prod.precio}</p
+                       <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+                       <button onclick ="eliminarDelCarrito(${prod.id})" class="boton-eliminar border-0 text-danger "><i class="fas fa-trash-alt"></button>`
+
+        contenedorCarrito.appendChild(div1)
+        localStorage.setItem(`carrito`, JSON.stringify(carrito))
+
+    })
+    //contadorCarrito.innerText = carrito.length
+    precioTotal.innerText = carrito.reduce((acc, prod) => acc + prod.precio, 0)
+}
+
+
+// agregar al Storage
+document.addEventListener(`DOMContentLoaded`, () => {
+    if (localStorage.getItem(`carrito`)) {
+        carrito = JSON.parse(localStorage.getItem(`carrito`))
+        actualizarCarrito()
+    }
+})
+
 function mostrarBurguers() {
     let sectionProductos = document.getElementById(`seccionProductos`)
     sectionProductos.innerHTML = ""
@@ -54,24 +102,55 @@ function mostrarBurguers() {
                                     <p style="color:#707070;"><strong>Guarnición</strong>: ${burguer.guarnicion}</p>
                                     <p><strong style="color:#707070;">PRECIO: </strong> $${burguer.precio}</strong><p>
                                     <div class="col-sm-12 mt-3">
-                                        <a href="#" class="btn btn-primary">AGREGAR AL CARRITO</a>
+                                        <a href="#" class="btn btn-primary" id="agregar ${burguer.id}" >AGREGAR AL CARRITO</a>
                                     </div>
                                 </div>
                             </div>`
         sectionProductos.appendChild(nuevoProducto)
+        const aumentarCarrito = document.getElementById(`aumentarCarrito`)
+        let contador = 0
 
+        sectionProductos.addEventListener(`click`, (e) => {
+            if (e.target.classList.contains(`btn-primary`))
+                contador++
+            aumentarCarrito.innerHTML = contador
 
+        })
 
+        const boton = document.getElementById(`agregar${burguer.id}`)
+        boton.addEventListener(`click`, () => {
+            agregarAlCarrito(burguer.id)
+        })
     })
-    const aumentarCarrito = document.getElementById(`aumentarCarrito`)
-    let contador = 0
 
-    sectionProductos.addEventListener(`click`, (e) => {
-        if (e.target.classList.contains(`btn-primary`))
-            contador++
-        aumentarCarrito.innerHTML = contador
+    // agregar al carrito
+    const agregarAlCarrito = (proId) => {
+        const existe = carrito.some(prod => prod.id === proId)
+        if (existe) {
+            const prod = carrito.map(prod => {
+                if (prod.id === proId) {
+                    prod.cantidad++
+                }
+            })
 
-    })
+        } else {
+
+            const item = datosBurguer.find((prod) => prod.id === proId)
+            carrito.push(item)
+            console.log(carrito);
+
+        }
+        actualizarCarrito()
+    }
+
+}
+
+//eliminar del carrito
+const eliminarDelCarrito = (prodId) => {
+    const item = carrito.find((prod) => prod.id === prodId)
+    const indice = carrito.indexOf(item)
+    carrito.splice(indice, 1)
+    actualizarCarrito()
 
 }
 
@@ -106,6 +185,17 @@ cheeseBurguer.addEventListener(`click`, encontrarBurguer)
 // rotaBurguer.addEventListener(`click`, mostrarPorPizza4)
 
 
+// Guardar datosBurguer en el Storge
+
+if (localStorage.getItem("datosBurguer")) {
+    datosBurguer = JSON.parse(localStorage.getItem("datosPizzaPersonal"))
+
+} else {
+    console.log("entro por primera vez");
+    localStorage.setItem("datosBurguer", JSON.stringify(datosBurguer))
+}
+
+// CATALOGO
 
 function catalogoBurguers() {
     alert("Mira nuestro catalogo de pizzas personal  por la consola")
@@ -117,11 +207,11 @@ function catalogoBurguers() {
 //funcion  agregarBurguer desde el dom con imputs que estan en el html 
 
 function guardarBurga() {
-    let tipoInput = document.getElementById(`tipoInput`)
-    let medidaInput = document.getElementById(`medidaInput`)
-    let descripcionInput = document.getElementById(`descripcionInput`)
-    let guarnacionInput = document.getElementById(`guarnicionInput`)
-    let precioInput = document.getElementById(`precioInput`)
+    const tipoInput = document.getElementById(`tipoInput`)
+    const medidaInput = document.getElementById(`medidaInput`)
+    const descripcionInput = document.getElementById(`descripcionInput`)
+    const guarnacionInput = document.getElementById(`guarnicionInput`)
+    const precioInput = document.getElementById(`precioInput`)
     burgaCreada = new PizzaPersonal(datosBurguer.length + 1, tipoInput.value, medidaInput.value, descripcionInput.value, guarnacionInput.value, precioInput.value, "burguer.jpg")
     datosBurguer.push(burgaCreada)
     console.log(burgaCreada);
@@ -134,12 +224,12 @@ btnGuardar.addEventListener(`click`, () => {
 })
 
 // funcion eliminar pizza
-function eliminarBurga() {
-    const nombreBurga = prompt("Cual es la Burguer que quieres eliminar, dame el nombre")
-    datosPizza.splice(nombreBurga, 1)
-    alert(`Has eliminado ${nombreBurga}`)
-    console.log(datosBurguerInicial.length)
-    console.log(datosBurguerInicial)
+// function eliminarBurga() {
+//     const nombreBurga = prompt("Cual es la Burguer que quieres eliminar, dame el nombre")
+//     datosPizza.splice(nombreBurga, 1)
+//     alert(`Has eliminado ${nombreBurga}`)
+//     console.log(datosBurguerInicial.length)
+//     console.log(datosBurguerInicial)
 
-}
+// }
 

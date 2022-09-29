@@ -10,3 +10,27 @@ h1 {
     text-align: center;
     color: rgb(46, 46, 46);
 }
+
+header div.modal-contenedor div.productoEnCarrito {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(180, 156, 156);
+}
+
+main section div.form {
+    border: 1px solid black;
+    border-radius: 10px;
+    margin: 20px 0 0 20px;
+}
+
+main section div.form form {
+    padding: 20px;
+}
+
+section#seccionProductos {
+    border: 1px solid black;
+    margin: 20px;
+    border-radius: 10px;
+}

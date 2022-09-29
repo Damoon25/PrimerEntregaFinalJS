@@ -31,6 +31,57 @@
                         <li class="nav-item">
                             <a class="nav-link" style="color: aliceblue;" href="#">PRODUCTOS</a>
                         </li>
+                        <li class="nav-item d-flex">
+                            <a class="nav-link" style="color: aliceblue;" href="#">CARRITO</a>
+                            <div class="modal-contenedor ">
+                                <div class="modal-carrito h-100 ">
+                                    <!-- Button trigger modal -->
+                                    <div class="d-flex align-items-center h-100">
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            class="btn background-none">
+                                            <i class="fas fa-cart-plus fs-4 m-2" id="aumentarCarrito"
+                                                style="color: lightgoldenrodyellow;"><span
+                                                    class="contadorCarrito fs-5 m-2">0</span></i>
+                                        </button>
+                                    </div>
+
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title text-primary fs-3" id="exampleModalLabel">
+                                                        Carrito de compras</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="carritoContenedor"></div>
+
+                                                </div>
+                                                <div class="modal-body border-top">
+                                                    <p class="precioProducto ">Precio total: $<span
+                                                            id="precioTotal">0</span></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button id="vaciarCarrito"
+                                                        class="boton-agregar btn btn-danger">Vaciar carrito</button>
+                                                    <button type="button" class="btn btn-primary">Pagar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!--<p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p> -->
+
+                                </div>
+
+                            </div>
+                        </li>
                     </ul>
                 </div>
             </div>
