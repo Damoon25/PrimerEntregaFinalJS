@@ -1,3 +1,9 @@
+
+Swal.fire({
+    title: "Bienvenido a La Buuurguesa!",
+    timer: 1500
+})
+
 class burguer {
     constructor(id, tipo, medida, descripcion, guarnicion, precio, imagen) {
         this.id = id,
@@ -55,6 +61,14 @@ let carrito = []
 botonVaciar.addEventListener(`click`, () => {
     carrito.length = 0
     actualizarCarrito()
+
+    Swal.fire({
+        position: 'top',
+        title: 'Has eliminado correctamente todo del carrito ',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1500
+    })
 })
 
 /// actualizar carrito
@@ -63,11 +77,17 @@ let actualizarCarrito = () => {
     carrito.forEach((prod) => {
         const div1 = document.createElement(`div`)
         div1.className = (`productoEnCarrito`)
-        div1.innerHTML = `<img src="/public/img/${prod.imagen}" class="card-img-top" alt="..." style="height: 50px; width: 50px;">
-                       <p>${prod.tipo} personal</p>
-                       <p>Precio: ${prod.precio}</p
-                       <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
-                       <button onclick ="eliminarDelCarrito(${prod.id})" class="boton-eliminar border-0 text-danger "><i class="fas fa-trash-alt"></button>`
+        div1.innerHTML = `
+                    <div class="card" style="width: 18rem; !important">
+                       <img src="/public/img/${burguer.imagen}" class="card-img-top" alt="..." style="height: 50px; width: 50px;">
+                       <div class="card-body">
+                            <p>${prod.tipo}</p>
+                            <p>Precio: ${prod.precio}</p>
+                            <p>Cantidad: <span id="cantidad">${prod.cantidad}</span></p>
+                            <button onclick ="eliminarDelCarrito(${prod.id})" class="boton-eliminar border-0 text-danger "><i class="fas fa-trash-alt"></button>
+                       </div>
+                    </div>
+                       `
 
         contenedorCarrito.appendChild(div1)
         localStorage.setItem(`carrito`, JSON.stringify(carrito))
@@ -93,14 +113,16 @@ function mostrarBurguers() {
         let nuevoProducto = document.createElement(`div`)
         nuevoProducto.classList.add(`${burguer.tipo}`)
         nuevoProducto.innerHTML = `
-                            <div id="${burguer.id}" class="card rounded-4 mx-2 my-3">
-                                <img src="../img/${burguer.imagen}" alt="${burguer.imagen}" class="card-img-top">
+                            <div id="${burguer.id}" class="card rounded-4 mx-2 my-3" style="width: 18rem;">
+                                <img src="img/${burguer.imagen}" alt="${burguer.imagen}" class="card-img-top">
                                 <div class="card-body">
                                     <h2 class="card-title text-left mb-3">${burguer.tipo}</h2>
-                                    <p style="color:#707070;"><strong>Descripción</strong>: ${burguer.descripcion}</p>
-                                    <p style="color:#707070;"><strong>Tamaño</strong>: ${burguer.medida}</p>
-                                    <p style="color:#707070;"><strong>Guarnición</strong>: ${burguer.guarnicion}</p>
-                                    <p><strong style="color:#707070;">PRECIO: </strong> $${burguer.precio}</strong><p>
+                                    <div class="card-body">
+                                        <p style="color:#707070;"><strong>Descripción</strong>: ${burguer.descripcion}</p>
+                                        <p style="color:#707070;"><strong>Tamaño</strong>: ${burguer.medida}</p>
+                                        <p style="color:#707070;"><strong>Guarnición</strong>: ${burguer.guarnicion}</p>
+                                        <p><strong style="color:#707070;">PRECIO: </strong> $${burguer.precio}</strong><p>
+                                    </div>
                                     <div class="col-sm-12 mt-3">
                                         <a href="#" class="btn btn-primary" id="agregar ${burguer.id}" >AGREGAR AL CARRITO</a>
                                     </div>
@@ -120,6 +142,15 @@ function mostrarBurguers() {
         const boton = document.getElementById(`agregar${burguer.id}`)
         boton.addEventListener(`click`, () => {
             agregarAlCarrito(burguer.id)
+            produc = document.getElementById('cantidad')
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Has agregado un nuevo producto ',
+                text: `pizza ${pizzaPersonal.tipo} personal  ha sido agregada con exito`,
+                showConfirmButton: false,
+                timer: 1500
+            })
         })
     })
 
@@ -220,7 +251,13 @@ let btnGuardar = document.getElementById(`guardar`)
 btnGuardar.addEventListener(`click`, () => {
     guardarBurga(datosBurguer)
     mostrarBurguers()
-
+    Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Su burguer ha sido guardada con exito',
+        showConfirmButton: false,
+        timer: 1500
+    })
 })
 
 // funcion eliminar pizza
