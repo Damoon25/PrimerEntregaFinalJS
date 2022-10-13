@@ -23,15 +23,31 @@ class burguer {
 // pizzas agregadas mediante un push()  en un array datosPizza = [];
 
 
-const cheeseBurga = new burguer(1, "CheeseBurga", "doble", "carne, queso cheddar", "papas", 700, "burguer.jpg")
-const blueBurga = new burguer(2, "BlueBurga", "doble", "carne, queso azul, nueces", "papas", 1000, "burguer.jpg")
-const laLuisito = new burguer(3, "LaLuisito", "triple", "carne, ajies, queso Provolone, guacamole", "nachos", 1500, "burguer.jpg")
-const rotaBurga = new burguer(4, "LaRotaBurga", "triple", "carne, queso tybo, huevo planchados, tomates confitados", "papas", 1350, "burguer.jpg")
-const baconFrito = new burguer(5, "BaconFrito", "doble", "carne, panceta frita, cebolla caramelizada", "papas", 1050, "burguer.jpg")
-const xxl = new burguer(6, "XXL", "doble", "carne 250gr, mozzarella, chorizo picado", "aros de cebolla", 1600, "burguer.jpg")
-const vegeta = new burguer(7, "Vegeta", "doble", "medallon de quinoa, queso vegano Milkaut, ali oli, morrones asados", "papas", 1300, "burguer.jpg")
+// const cheeseBurga = new burguer(1, "CheeseBurga", "doble", "carne, queso cheddar", "papas", 700, "burguer.jpg")
+// const blueBurga = new burguer(2, "BlueBurga", "doble", "carne, queso azul, nueces", "papas", 1000, "burguer.jpg")
+// const laLuisito = new burguer(3, "LaLuisito", "triple", "carne, ajies, queso Provolone, guacamole", "nachos", 1500, "burguer.jpg")
+// const rotaBurga = new burguer(4, "LaRotaBurga", "triple", "carne, queso tybo, huevo planchados, tomates confitados", "papas", 1350, "burguer.jpg")
+// const baconFrito = new burguer(5, "BaconFrito", "doble", "carne, panceta frita, cebolla caramelizada", "papas", 1050, "burguer.jpg")
+// const xxl = new burguer(6, "XXL", "doble", "carne 250gr, mozzarella, chorizo picado", "aros de cebolla", 1600, "burguer.jpg")
+// const vegeta = new burguer(7, "Vegeta", "doble", "medallon de quinoa, queso vegano Milkaut, ali oli, morrones asados", "papas", 1300, "burguer.jpg")
 
-const datosBurguer = [cheeseBurga, blueBurga, laLuisito, rotaBurga, baconFrito, xxl, vegeta];
+// const datosBurguer = [cheeseBurga, blueBurga, laLuisito, rotaBurga, baconFrito, xxl, vegeta];
+
+//llamar datosburguer
+let datosBurguer = []
+const llamarBurguer = async () => {
+    const response = await fetch("/json/burguer.json")
+    const burguers = await response.json()
+    console.log(data);
+    for (let burguer of burguers) {
+        let nuevaBurguer = new PizzaPersonal(burguer.id, burguer.tipo, burguer.medida, burguer.descripcion, burguer.guarnicion, burguer.precio, burguer.imagen)
+        datosBurguer.push(nuevaBurguer)
+    }
+
+
+
+}
+llamarBurguer()
 
 // function agregarBurguer() {
 //     const tipoIngresado = prompt("Cual tipo desea?")
@@ -54,6 +70,8 @@ const botonVaciar = document.getElementById(`vaciarCarrito`)
 const contadorCarrito = document.getElementById(`contadorCarrito`)
 
 const precioTotal = document.getElementById(`precioTotal`)
+
+const productoEnCarrito = document.querySelector('.productoEnCarrito')
 // agregar carrito
 let carrito = []
 
@@ -218,13 +236,8 @@ cheeseBurguer.addEventListener(`click`, encontrarBurguer)
 
 // Guardar datosBurguer en el Storge
 
-if (localStorage.getItem("datosBurguer")) {
-    datosBurguer = JSON.parse(localStorage.getItem("datosPizzaPersonal"))
+localStorage.getItem("datosBurguer") ? datosBurguer = JSON.parse(localStorage.getItem("datosBurguer")) : console.log("entro por primera vez"), localStorage.setItem("datosBurguer", JSON.stringify(datosBurguer))
 
-} else {
-    console.log("entro por primera vez");
-    localStorage.setItem("datosBurguer", JSON.stringify(datosBurguer))
-}
 
 // CATALOGO
 
