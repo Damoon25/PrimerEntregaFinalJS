@@ -20,19 +20,6 @@ class burguer {
     }
 }
 
-// pizzas agregadas mediante un push()  en un array datosPizza = [];
-
-
-// const cheeseBurga = new burguer(1, "CheeseBurga", "doble", "carne, queso cheddar", "papas", 700, "burguer.jpg")
-// const blueBurga = new burguer(2, "BlueBurga", "doble", "carne, queso azul, nueces", "papas", 1000, "burguer.jpg")
-// const laLuisito = new burguer(3, "LaLuisito", "triple", "carne, ajies, queso Provolone, guacamole", "nachos", 1500, "burguer.jpg")
-// const rotaBurga = new burguer(4, "LaRotaBurga", "triple", "carne, queso tybo, huevo planchados, tomates confitados", "papas", 1350, "burguer.jpg")
-// const baconFrito = new burguer(5, "BaconFrito", "doble", "carne, panceta frita, cebolla caramelizada", "papas", 1050, "burguer.jpg")
-// const xxl = new burguer(6, "XXL", "doble", "carne 250gr, mozzarella, chorizo picado", "aros de cebolla", 1600, "burguer.jpg")
-// const vegeta = new burguer(7, "Vegeta", "doble", "medallon de quinoa, queso vegano Milkaut, ali oli, morrones asados", "papas", 1300, "burguer.jpg")
-
-// const datosBurguer = [cheeseBurga, blueBurga, laLuisito, rotaBurga, baconFrito, xxl, vegeta];
-
 //llamar datosburguer
 let datosBurguer = []
 const llamarBurguer = async () => {
@@ -48,20 +35,6 @@ const llamarBurguer = async () => {
 
 }
 llamarBurguer()
-
-// function agregarBurguer() {
-//     const tipoIngresado = prompt("Cual tipo desea?")
-//     const medidaIngresada = prompt("De que medida la quieres?")
-//     const descripcionIngresada = prompt("Que ingredientes va a tener su burguer?")
-//     const guarnicionIngresada = prompt("Ahora decime, que guarnición va a tener?")
-//     const precioIngresado = parseInt(prompt("Ingresá el valor de la burguer"))
-//     burguerIngresada = new burguer(datosBurguer.length + 1, tipoIngresado, medidaIngresada, descripcionIngresada, guarnicionIngresada, precioIngresado)
-//     datosBurguer.push(burguerIngresada)
-//     console.log(burguerIngresada)
-// }
-
-// constantes del carrito
-// const contenedorProductos = document.getElementById(`contenedor-productos`)
 
 const contenedorCarrito = document.getElementById(`carritoContenedor`)
 
