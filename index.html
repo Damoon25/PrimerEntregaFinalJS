@@ -5,161 +5,70 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="public/css/main.css" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/03b4dcfa96.js" crossorigin="anonymous"></script>
-    <title>LA BURGUESA</title>
+    <title>La burguesa / Casa de Hamburguesas</title>
+    <script src="https://kit.fontawesome.com/df59baf6b8.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/main.css">
+    <script defer src="./public/js/stock.js"></script>
+    <script defer src="./public/js/app.js"></script>
+    <script defer src="./public/js/modal.js"></script>
 </head>
 
 <body>
-
     <header>
-        <nav class="navbar navbar-expand-lg bg-dark p-2">
+        <nav class="navbar navbar-expand-lg bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" style="color: aliceblue;" href="#"><strong>LA BURGUESA</strong></a>
+                <a class="navbar-brand fs-2" style="color: #ffff;" href="#">LA BUUURGUESA!</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
+                    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+                    aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" style="color: aliceblue;" aria-current="page" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" style="color: aliceblue;" href="#">PRODUCTOS</a>
-                        </li>
-                        <li class="nav-item d-flex">
-                            <a class="nav-link" style="color: aliceblue;" href="#">CARRITO</a>
-                            <div class="modal-contenedor ">
-                                <div class="modal-carrito h-100 ">
-                                    <!-- Button trigger modal -->
-                                    <div class="d-flex align-items-center h-100">
-                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                            class="btn background-none">
-                                            <i class="fas fa-cart-plus fs-4 m-2" id="aumentarCarrito"
-                                                style="color: lightgoldenrodyellow;"><span
-                                                    class="contadorCarrito fs-5 m-2">0</span></i>
-                                        </button>
-                                    </div>
-
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title text-primary fs-3" id="exampleModalLabel">
-                                                        Carrito de compras</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <div id="carritoContenedor"></div>
-
-                                                </div>
-                                                <div class="modal-body border-top">
-                                                    <p class="precioProducto ">Precio total: $<span
-                                                            id="precioTotal">0</span></p>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button id="vaciarCarrito"
-                                                        class="boton-agregar btn btn-danger">Vaciar carrito</button>
-                                                    <button type="button" class="btn btn-primary">Pagar</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-
-                                    <!--<p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p> -->
-
-                                </div>
-
-                            </div>
-                        </li>
-                    </ul>
+                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a class="nav-link active mt-2 fs-5" style="color: #ffff;" aria-current="page" href="#">Home</a>
+                        <a class="nav-link mt-2 fs-5" style="color: #ffff;" href="#">Productos</a>
+                        <a class="nav-link mt-2 fs-5" style="color: #ffff;" href="#">Carrito</a>
+                        <a class="nav-link"><button id="boton-carrito"><i class="fas fa-shopping-cart me-2"></i><span
+                                    id="contadorCarrito">0</span></button></a>
+                    </div>
                 </div>
             </div>
         </nav>
+        </nav>
+        <!-- <h1 id="titulo" class="titulo">LA BURGUESA!</h1>
+        <button id="boton-carrito"><i class="fas fa-shopping-cart"></i><span id="contadorCarrito">0</span></button> -->
     </header>
 
-    <main class="container d-flex justify-content-center mt-5 mb-3">
-        <div class="row col-sm-12">
-            <section id="checkBox" class="col col-sm-6">
-                <div id="divCheckBox">
-                    <p class="listCheckBox">
-                        <input id="mostrarTodo" type="checkbox" class="valor1"> Mostrar todo
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="cheeseBurga" type="checkbox" class="valores"> Cheese Burga
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="blueBurga" type="checkbox" class="valores"> Blue Burga
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="laLuisito" type="checkbox" class="valores"> La Luisito
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="rotaBurga" type="checkbox" class="valores"> La Rota Burga
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="baconFrito" type="checkbox" class="valores"> Bacon Frito
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="xxl" type="checkbox" class="valores"> XXL
-                    </p>
-                    <p class="listCheckBox">
-                        <input id="vegeta" type="checkbox" class="valores"> Vegeta
-                    </p>
+    <div class="container">
+        <main id="contenedor-productos">
+        </main>
+    </div>
 
-                </div>
-                <form>
-                    <div class="col-sm-8">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="tipoInput" placeholder="Tipo de Burga">
-                            <label for="tipoInput">Tipo de Burga</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="medidaInput" placeholder="Medida">
-                            <label for="medidaInput">Tamaño </label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="descripcionInput" placeholder="Descripción">
-                            <label for="descripcionInput">Descripción</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="guarnicionInput" placeholder="Guarnición">
-                            <label for="guarnicionInput">Guarnición</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="number" class="form-control" id="precioInput" placeholder="Precio">
-                            <label for="precioInput">Precio</label>
-                        </div>
-                        <button id="guardar" type="button" value="guardar"
-                            class="btn btn-success my-3 px-2">GUARDAR</button>
-                    </div>
-                </form>
-
-            </section>
-            <div id="seccionProductos" class=" d-flex  flex-wrap justify-content-center px-5 list-group-item"
-                style="width:88%;">>
+    <div class="modal-contenedor">
+        <div class="modal-carrito">
+            <h3>Carrito</h3>
+            <button id="carritoCerrar"><i class="fas fa-times-circle"></i></button>
+            <div id="carrito-contenedor">
+                <!-- <div class="productoEnCarrito">
+                    <p>Buzo 1</p>
+                    <p>Precio: $1200</p>
+                    <button class="boton-eliminar"><i class="fas fa-trash-alt"></i></button>
+                </div> -->
             </div>
+            <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
+            <button id="vaciar-carrito" class="boton-agregar">Vaciar carrito</button>
         </div>
-
-
-
-
-    </main>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
         crossorigin="anonymous"></script>
-    <script src="public/js/main.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.min.js"
+        integrity="sha384-IDwe1+LCz02ROU9k972gdyvl+AESN10+x7tBKgc9I5HFtuNz0wWnPclzo6p9vxnk"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
