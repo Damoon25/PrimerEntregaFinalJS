@@ -8,6 +8,24 @@ const cantidad = document.getElementById('cantidad')
 const precioTotal = document.getElementById('precioTotal')
 const cantidadTotal = document.getElementById('cantidadTotal')
 
+class Burguer {
+    constructor(id, tipo, medida, cantidad, descripcion, guarnicion, precio, img) {
+        this.id = id,
+            this.tipo = tipo,
+            this.medida = medida,
+            this.cantidad = cantidad,
+            this.descripcion = descripcion,
+            this.guarnicion = guarnicion,
+            this.precio = precio,
+            this.img = img
+
+    }
+    datosBurguer() {
+        console.log(` ID : ${this.id} \n TIPO: ${this.tipo} \n MEDIDA: ${this.medida} \n CANTIDAD: ${this.cantidad} \n DESCRIPCIÓN: ${this.precio} \n GUARNICIÓN: ${this.precio} \n PRECIO: ${this.precio}`)
+
+    }
+}
+
 let carrito = []
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,32 +39,43 @@ botonVaciar.addEventListener('click', () => {
     actualizarCarrito()
 })
 
-stockProductos.forEach((producto) => {
-    const div = document.createElement('div')
-    div.classList.add('card')
-    div.classList.add('rounded-4')
-    div.classList.add('producto')
-    div.innerHTML = `
-    <div class="card-header">
-        <img src=${producto.img} class="card-img-top" alt= "">
-    </div>
-    <div class="card-body">
-        <h3>${producto.tipo}</h3>
-        <p><strong>Descripción</strong>: ${producto.descripcion}</p>
-        <p><strong>Tamaño</strong>: ${producto.medida}</p>
-        <p class="precioProducto">Precio: $ ${producto.precio}</p>
-        <button class="btn btn-primary rounded-pill" id="agregar${producto.id}">Agregar <i class="fas fa-shopping-cart"></i></button>
-    </div>
-    `
-    contenedorProductos.appendChild(div)
+let datosBurguer = []
+let traerProductos = async () => {
+    const response = await fetch("/public/json/stockProductos.json")
+    const data = await response.json()
+    console.log(data);
+    for (let productos of data) {
+        let nuevoProducto = new Burguer(productos.id, productos.tipo, productos.medida, productos.cantidad, productos.descripcion, productos.guarnicion, productos.precio, productos.img)
+        datosBurguer.push(nuevoProducto)
+    }
+    datosBurguer.forEach((producto) => {
+        const div = document.createElement('div')
+        div.classList.add('card')
+        div.classList.add('rounded-4')
+        div.classList.add('producto')
+        div.innerHTML = `
+        <div class="card-header">
+            <img src=${producto.img} class="card-img-top" alt= "">
+        </div>
+        <div class="card-body">
+            <h3>${producto.tipo}</h3>
+            <p><strong>Descripción</strong>: ${producto.descripcion}</p>
+            <p><strong>Tamaño</strong>: ${producto.medida}</p>
+            <p class="precioProducto">Precio: $ ${producto.precio}</p>
+            <button class="btn btn-primary rounded-pill" id="agregar${producto.id}">Agregar <i class="fas fa-shopping-cart"></i></button>
+        </div>
+        `
+        contenedorProductos.appendChild(div)
 
-    const boton = document.getElementById(`agregar${producto.id}`)
+        const boton = document.getElementById(`agregar${producto.id}`)
 
-    boton.addEventListener('click', () => {
-        agregarAlCarrito(producto.id)
-        //
+        boton.addEventListener('click', () => {
+            agregarAlCarrito(producto.id)
+            //
+        })
     })
-})
+}
+traerProductos();
 
 //AGREGAR AL CARRITO
 const agregarAlCarrito = (prodId) => {
@@ -60,7 +89,7 @@ const agregarAlCarrito = (prodId) => {
             }
         })
     } else { //EN CASO DE QUE NO ESTÉ, AGREGAMOS EL CURSO AL CARRITO
-        const item = stockProductos.find((prod) => prod.id === prodId)// Trabajamos con las ID
+        const item = datosBurguer.find((prod) => prod.id === prodId)// Trabajamos con las ID
         //Una vez obtenida la ID, lo que haremos es hacerle un push para agregarlo al carrito
         carrito.push(item)
     }
